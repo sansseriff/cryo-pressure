@@ -238,6 +238,7 @@
     border-radius: 4px;
     font-size: 1em;
     background-color: #fff;
+    color: #333; /* Explicitly set dark text color for inputs */
   }
 
   .input-group input:focus {
