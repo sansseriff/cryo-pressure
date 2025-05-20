@@ -16,7 +16,7 @@
     <ol>
       <li>
         <strong>Actual Water Vapor Pressure of Ambient Air:</strong>
-        <p>The process begins by determining the actual partial pressure of water vapor in the ambient air (${katex.renderToString("P_{\\text{actual,ambient}}")}). This is calculated from the ambient temperature (${katex.renderToString("T_{\\text{ambient}}")}) and relative humidity (${katex.renderToString("RH_{\\text{ambient}}")}). The Arden Buck equation is used to find the saturation vapor pressure at ${katex.renderToString("T_{\\text{ambient}}")}, which is then scaled by ${katex.renderToString("RH_{\\text{ambient}}")}:
+        <p>The process begins by determining the actual partial pressure of water vapor in the ambient air (${katex.renderToString("P_{\\text{actual,ambient}}")}). This is calculated from the ambient temperature (${katex.renderToString("T_{\\text{ambient}}")}) and relative humidity (${katex.renderToString("RH_{\\text{ambient}}")}). The <a href="https://en.wikipedia.org/wiki/Arden_Buck_equation" target="_blank" rel="noopener noreferrer">Arden Buck equation</a> is used to find the saturation vapor pressure at ${katex.renderToString("T_{\\text{ambient}}")}, which is then scaled by ${katex.renderToString("RH_{\\text{ambient}}")}:
         ${katex.renderToString("P_{\\text{actual,ambient}} = P_{\\text{sat}}(T_{\\text{ambient}}) \\times \\frac{RH_{\\text{ambient}}}{100}")}
         </p>
       </li>
@@ -39,7 +39,7 @@
         </p>
       </li>
     </ol>
-    <p>The <code>calculateMaxAirInletPressure</code> function in the script implements this final calculation, using ${katex.renderToString("T_{\\text{coldest}}")}, ${katex.renderToString("T_{\\text{ambient}}")}, and ${katex.renderToString("RH_{\\text{ambient}}")} as inputs to return the maximum safe pressure of air to introduce into the cryostat.</p>
+    <p>The <code><a href="https://github.com/sansseriff/cryo-pressure/blob/master/src/lib/calculator.ts" target="_blank" rel="noopener noreferrer">calculateMaxAirInletPressure</a></code> function in the script implements this final calculation, using ${katex.renderToString("T_{\\text{coldest}}")}, ${katex.renderToString("T_{\\text{ambient}}")}, and ${katex.renderToString("RH_{\\text{ambient}}")} as inputs to return the maximum safe pressure of air to introduce into the cryostat.</p>
   `;
 
   function handleKeydown(event: KeyboardEvent) {
@@ -148,6 +148,21 @@
     padding: 2px 5px;
     border-radius: 3px;
     font-family: "Courier New", Courier, monospace;
+  }
+  .explanation-body code a {
+    color: inherit; /* Make the link inside code tag inherit code's color */
+    text-decoration: underline; /* But still show it's a link */
+  }
+  .explanation-body code a:hover {
+    color: #f38227; /* Change color on hover for visibility */
+  }
+
+  .explanation-body a {
+    color: #f38227; /* Orange link color */
+    text-decoration: none;
+  }
+  .explanation-body a:hover {
+    text-decoration: underline;
   }
 
   /* KaTeX styling - ensure katex.min.css is also linked in App.svelte or global styles */

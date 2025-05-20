@@ -48,7 +48,8 @@
       <img src={sadScientistImg} alt="Sad Scientist with Cryostat" />
       <p class="caption">
         Sally is bummed that the cryostat's been warming all weekend, and now
-        it's Monday and she still can't open it.
+        it's Monday and she still can't open it. She can't be bothered to use a
+        dry vent gas like helium.
       </p>
     </div>
     <div class="calculator-section">
@@ -92,6 +93,16 @@
           placeholder="e.g., 220"
         />
       </div>
+
+      {#if coldestSurfaceK !== null && !isNaN(coldestSurfaceK) && coldestSurfaceK <= 200}
+        <div class="result critical-warning">
+          <p>
+            Wait! You shouldn't add any air if the internal parts are still at
+            or below 200 K. Consider using a dry inert gas for initial warming
+            if faster warmup is needed, or wait for further passive warming.
+          </p>
+        </div>
+      {/if}
 
       {#if maxAirInletPressureTorr !== null && !isNaN(maxAirInletPressureTorr)}
         <div class="result">
@@ -145,7 +156,8 @@
   .container {
     display: flex;
     flex-wrap: wrap; /* Allow wrapping on smaller screens */
-    height: 100vh;
+    /* height: 100vh; */ /* Changed to min-height for responsiveness */
+    min-height: 100vh; /* Ensures container takes at least full viewport height */
     padding: 20px;
     gap: 30px; /* Space between image and calculator sections */
     align-items: center; /* Vertically center content if it doesn't fill height */
@@ -158,6 +170,7 @@
     max-width: 540px; /* Max width for the image section */
     text-align: center;
     padding: 20px;
+    box-sizing: border-box; /* Ensure padding doesn't add to max-width issues */
   }
 
   .image-section img {
@@ -181,6 +194,7 @@
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* Ensure padding doesn't add to max-width issues */
   }
 
   h1 {
@@ -240,6 +254,16 @@
     border-radius: 4px;
   }
 
+  .result.critical-warning {
+    background-color: #f8d7da; /* Light red for critical warnings */
+    border-left-color: #d9534f; /* Darker red border */
+    color: #721c24; /* Dark red text */
+    margin-bottom: 20px; /* Add some space if other results follow */
+  }
+  .result.critical-warning p {
+    font-weight: bold;
+  }
+
   .result h2 {
     margin-top: 0;
     color: #8c5a2b;
@@ -270,11 +294,44 @@
     .container {
       flex-direction: column;
       align-items: center;
+      padding: 15px; /* Reduced padding for smaller screens */
+      gap: 20px; /* Reduced gap for smaller screens */
+      height: auto; /* Allow container to grow with content */
+      min-height: 100vh; /* Still ensure it takes at least full viewport height */
     }
     .image-section,
     .calculator-section {
-      max-width: 90%; /* Allow sections to take more width on small screens */
+      max-width: 95%; /* Allow sections to take more width on small screens */
       flex-basis: auto; /* Reset flex-basis */
+      width: 100%; /* Make sections take full available width within parent's padding */
+    }
+    .image-section {
+      padding: 15px; /* Reduced padding */
+    }
+    .calculator-section {
+      padding: 20px; /* Reduced padding */
+    }
+
+    h1 {
+      font-size: 1.5em; /* Slightly smaller h1 for small screens */
+    }
+  }
+
+  @media (max-width: 480px) {
+    .container {
+      padding: 10px; /* Further reduce padding for very small screens */
+    }
+    .image-section {
+      padding: 10px;
+    }
+    .calculator-section {
+      padding: 15px;
+    }
+    .input-group input {
+      padding: 8px; /* Smaller input padding */
+    }
+    .result .pressure-value {
+      font-size: 1.6em; /* Adjust result font size */
     }
   }
 </style>
