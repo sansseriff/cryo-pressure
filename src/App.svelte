@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { calculateMaxAirInletPressure } from "./lib/calculator";
-  import sadScientistImg from "./assets/sad_scientist.png";
+  import sadScientistImg from "./assets/sad_scientist.webp";
   import ExplanationModal from "./lib/ExplanationModal.svelte";
   import "katex/dist/katex.min.css"; // Import KaTeX CSS
 
